@@ -292,9 +292,6 @@ class Mailer < ActionMailer::Base
   # Overrides default deliver! method to prevent from sending an email
   # with no recipient, cc or bcc
   def deliver!(mail = @mail)
-    # Needed for sendgrid
-    from "no-reply@twentyci.co.uk"
-    
     set_language_if_valid @initial_language
     return false if (recipients.nil? || recipients.empty?) &&
                     (cc.nil? || cc.empty?) &&
