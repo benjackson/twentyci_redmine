@@ -141,7 +141,6 @@ default:
 # that overrides the default ones
 production:
   attachments_storage_path: File.join(File.dirname(__FILE__), "..", "tmp", "files")
-  public_directory: File.join(File.dirname(__FILE__), "..", "tmp", "plugin_assets")
 
 # specific configuration options for development environment
 # that overrides the default ones
