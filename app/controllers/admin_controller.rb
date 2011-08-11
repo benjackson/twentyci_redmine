@@ -64,7 +64,7 @@ class AdminController < ApplicationController
       @test = Mailer.deliver_test(User.current)
       flash[:notice] = l(:notice_email_sent, User.current.mail)
     rescue Exception => e
-      flash[:error] = l(:notice_email_error, e.message)
+      flash[:error] = l(:notice_email_error, e.message + " " + ActionMailer::Base.smtp_settings)
     end
     ActionMailer::Base.raise_delivery_errors = raise_delivery_errors
     redirect_to :controller => 'settings', :action => 'edit', :tab => 'notifications'
