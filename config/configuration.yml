@@ -147,7 +147,7 @@ production:
       address: "smtp.sendgrid.net"
       port: 25
       authentication: :plain
-      user_name: "heroku.com"
+      user_name: "app730849@heroku.com"
       password: "09c27d02a916931a75"
       domain: "heroku.com"
 
