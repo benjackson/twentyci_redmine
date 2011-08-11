@@ -46,7 +46,7 @@ activity_days_default:
 per_page_options:
   default: '25,50,100'
 mail_from:
-  default: redmine@example.net
+  default: "no-reply@twentyci.co.uk"
 bcc_recipients:
   default: 1
 plain_text_mail:
