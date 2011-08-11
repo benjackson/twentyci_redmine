@@ -50,6 +50,8 @@ Rails::Initializer.run do |config|
   # It will automatically turn deliveries on
   config.action_mailer.perform_deliveries = false
 
+  config.action_controller.session = { :key => "_myapp_session", :secret => "there was an old man from crewe..." }
+
   config.gem 'rubytree', :lib => 'tree'
   config.gem 'coderay', :version => '~>0.9.7'
   
