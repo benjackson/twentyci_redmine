@@ -141,15 +141,15 @@ default:
 # that overrides the default ones
 production:
   attachments_storage_path: File.join(File.dirname(__FILE__), "..", "tmp", "files")
-  #email_delivery:
-  #  delivery_method: :smtp
-  #  smtp_settings:
-  #    address: "smtp.sendgrid.net"
-  #    port: 25
-  #    authentication: :plain
-  #    user_name: ENV['SENDGRID_USERNAME']
-  #    password: ENV['SENDGRID_PASSWORD']
-  #    domain: ENV['SENDGRID_DOMAIN']
+  email_delivery:
+    delivery_method: :smtp
+    smtp_settings:
+      address: "smtp.sendgrid.net"
+      port: 25
+      authentication: :plain
+      user_name: ENV['SENDGRID_USERNAME']
+      password: ENV['SENDGRID_PASSWORD']
+      domain: ENV['SENDGRID_DOMAIN']
 
 # specific configuration options for development environment
 # that overrides the default ones
