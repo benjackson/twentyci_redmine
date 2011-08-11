@@ -23,6 +23,8 @@ class Mailer < ActionMailer::Base
   helper :issues
   helper :custom_fields
 
+  default :from => "no-reply@twentyci.co.uk"
+
   include ActionController::UrlWriter
   include Redmine::I18n
 
