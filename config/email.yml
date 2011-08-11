@@ -2,7 +2,6 @@ production:
   delivery_method: :smtp
   smtp_settings:
     address: smtp.sendgrid.net
-    domain: heroku.com
     port: 25
     authentication: :plain
     user_name: ENV['SENDGRID_USERNAME'],
