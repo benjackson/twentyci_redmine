@@ -97,7 +97,6 @@ default:
   # Examples:
   # attachments_storage_path: /var/redmine/files
   # attachments_storage_path: D:/redmine/files
-  attachments_storage_path: File.join(File.dirname(__FILE__), "..", "tmp", "files")
   
   # Configuration of the autologin cookie.
   # autologin_cookie_name: the name of the cookie (default: autologin)
@@ -141,6 +140,8 @@ default:
 # specific configuration options for production environment
 # that overrides the default ones
 production:
+  attachments_storage_path: File.join(File.dirname(__FILE__), "..", "tmp", "files")
+  public_directory: File.join(File.dirname(__FILE__), "..", "tmp", "plugin_assets")
 
 # specific configuration options for development environment
 # that overrides the default ones
