@@ -147,9 +147,9 @@ production:
       address: "smtp.sendgrid.net"
       port: 25
       authentication: :plain
-      user_name: ENV['SENDGRID_USERNAME']
-      password: ENV['SENDGRID_PASSWORD']
-      domain: ENV['SENDGRID_DOMAIN']
+      user_name: "heroku.com"
+      password: "09c27d02a916931a75"
+      domain: "heroku.com"
 
 # specific configuration options for development environment
 # that overrides the default ones
