@@ -1,0 +1,40 @@
+<div style="<%= style %>" class="burndown_chart" id="burndown_<%= sprint.id %>"><div class="loading">Generating chart...</div></div>
+
+<script type="text/javascript" language="javascript">
+  <%-
+      burndown = sprint.burndown
+      series = burndown.series.sort{|a, b| l("label_#{a}") <=> l("label_#{b}") }
+      dates = sprint.days(:all)
+
+      ticks = dates.collect{|d| Time.local(d.year, d.mon, d.mday) }.collect{|t| t.strftime('%a')[0, 1].downcase + ' ' + t.strftime(::I18n.t('date.formats.short')) }
+      ticks = (0..dates.size * 2).collect{|i| [i, (i % 2 == 0 ? ' ' : ticks[(i-1)/2] + ' ')] }
+
+      chart = {
+        :mode => mode,
+        :series => series.collect{|s| burndown[s].enum_for(:each_with_index).collect{|d,i| [i*2, d]}},
+        :position => Hash[*(0.upto(series.size - 1).collect{|i| [series[i], i]}.flatten)],
+        :options => {
+          :series => series.collect{|s| {:label => l("label_#{s}"), :yaxis => (s.to_s =~ /^points/ ? 'y2axis' : 'yaxis')}},
+          :legend => {:show => (mode == :full), :location => 'sw'},
+          :grid => {:shadow => false},
+          :seriesDefaults => {:showMarker => (mode == :full), :shadow => false},
+          :axesDefaults =>  {:showTick => (mode == :full)},
+          :axes => {
+              :xaxis => {
+                :min => 0,
+                :max => dates.size * 2,
+                :ticks => ticks,
+                :tickOptions => {:angle => -90, :fontSize => '8pt'}
+              },
+              :yaxis => {:min => 0, :max => burndown[:max_hours], :tickOptions => {:formatString => '%d'}},
+              :y2axis => {:min => 0, :max => burndown[:max_points], :tickOptions => {:formatString => '%d'}}
+          },
+          :highlighter => { :tooltipAxes => 'y', :formatString => '%s' }
+        }
+      }
+  %>
+  RB.burndown.charts[<%= sprint.id %>] = <%= chart.to_json %>;
+  RB.burndown.charts[<%= sprint.id %>].options.axesDefaults.tickRenderer = RB.$.jqplot.CanvasAxisTickRenderer;
+  RB.burndown.charts[<%= sprint.id %>].options.axes.xaxis.rendererOptions = {tickRenderer: RB.$.jqplot.CanvasAxisTickRenderer};
+  RB.burndown.initialize();
+</script>
