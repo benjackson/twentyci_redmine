@@ -1,0 +1,28 @@
+<% 
+# Define some "helpers" here
+
+def issue_status_pane(pane_name)
+    selected_status = @settings['panes'][pane_name] && @settings['panes'][pane_name]['status'] ? @settings['panes'][pane_name]['status'].to_i : ''
+    limit = @settings['panes'][pane_name] && @settings['panes'][pane_name]['limit'] ? @settings['panes'][pane_name]['limit'].to_i : ''
+    status = content_tag(:p,
+      content_tag(:label, l("kanban_label_#{pane_name}_pane".to_sym)) + 
+      select_tag("settings[panes][#{pane_name}][status]",
+                 content_tag(:option, '') +
+                 options_from_collection_for_select(IssueStatus.all,
+                                                    :id,
+                                                    :name,
+                                                    selected_status)) + 
+
+      content_tag(:span, l(:kanban_label_limit), :style => "padding: 0 0.5em 0 3em;") + 
+      text_field_tag("settings[panes][#{pane_name}][limit]", limit ))
+      return status
+
+end
+%>
+
+<%= render_tabs([
+                 {:name => 'general', :partial => 'settings/kanban_general', :label => :kanban_text_general_settings},
+                 {:name => 'panes', :partial => 'settings/kanban_panes', :label => :kanban_text_pane_settings},
+                 {:name => 'workflow-incoming', :partial => 'settings/kanban_workflow_incoming', :label => :kanban_text_workflow_incoming_settings},
+                 {:name => 'kanban-overview', :partial => 'settings/kanban_overview', :label => :kanban_text_overview_panel}
+]) %>

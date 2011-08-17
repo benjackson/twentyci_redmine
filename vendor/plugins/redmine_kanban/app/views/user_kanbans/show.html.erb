@@ -1,0 +1,113 @@
+<div class="flash error" style="display:none"></div>
+<div class="flash warning" style="display:none"></div>
+<div class="flash notice" style="display:none"></div>
+
+<h2>
+  <% if showing_current_user_kanban? %>
+    <%= l(:text_my_kanban_requests_title) %>
+  <% else %>
+    <%= l(:text_user_kanban_requests_title, :user => @user ) %>
+  <% end %>
+</h2>
+
+<% kanban_contextual_menu(:kanban => @kanban, :user => @user) do |menu| %>
+  <%= menu.color_help %>
+  <%= menu.assigned_requests %>
+  <%= menu.new_issue %>
+  <%= menu.user_switch :url => url_for(:controller => 'user_kanbans', :action => 'create') %>
+<% end %>
+
+<div class="clear"></div>
+
+<%= render :partial => 'kanbans/user_help' %>
+<%= render :partial => 'kanbans/color_help' %>
+
+<%= render(:partial => 'kanbans/deadlines', :locals => {:kanban => @kanban, :user => @user, :scope_method => :created_by}) %>
+
+<div id="new-requests" class="user-kanban vertical-lane">
+  <div class="kanban-headers">
+    <div class="kanban-header">
+      <%= content_tag(:h3, incoming_title) %>
+    </div>
+  </div>
+
+  <div class="project-lane" id="user-kanban-show-incoming">
+    <%= kanban_remote_data(kanban_user_kanban_path(:id => @user.id,
+                                                       :project => nil,
+                                                       :column => :incoming,
+                                                       :format => 'js'),
+                           'user-kanban-show-incoming') %>
+  </div>
+  <div style="clear:left;"> </div>
+
+</div>
+
+<div id="kanban" class="user-kanban" style="width: 80%">
+  <div class="kanban-headers horizontal-lane">
+    <div class="kanban-header pane equal-column" style="width: <%= my_kanban_column_width(:project) %>%"><%= content_tag(:h3, l(:label_project)) %></div>
+    <% ordered_panes(:only => [:backlog, :selected, :active, :testing]).each do |pane_name| %>
+      <div class="kanban-header pane equal-column" style="width: <%= my_kanban_column_width(pane_name.to_sym) %>%"><%= content_tag(:h3, l("kanban_text_#{pane_name}".to_sym)) %></div>
+    <% end %>
+  </div>
+
+  <% @projects_sorted_by_tree.each do |project| %>
+  <div class="project-lane horizontal-lane">
+    <div class="project pane equal-column" style="width: <%= my_kanban_column_width(:project) %>%">
+      <h2 class="project-name">
+        <%= link_to(h(project), {:controller => "projects", :action => "show", :id => project}) %>
+      </h2>
+
+      <div class="inner-pane">
+        <%= content_tag(:h3, l(:kanban_text_finished_requests)) %>
+        <% user_kanban_div_helper(:project_id => project.id, :column => :finished, :user => @user) do |div| %>
+          <%= div.issues(@kanban.finished_issues_for(:user => @user, :project => project)) %>
+        <% end %>
+      </div>
+
+      <div style="clear:left;"> </div>
+
+      <div class="inner-pane">
+        <%= content_tag(:h3, l(:kanban_text_canceled_requests)) %>
+        <% user_kanban_div_helper(:project_id => project.id, :column => :canceled, :user => @user) do |div| %>
+          <%= div.issues(@kanban.canceled_issues_for(:user => @user, :project => project)) %>
+        <% end %>
+      </div>
+
+  <div style="clear:left;"> </div>
+    </div>
+
+    <% ordered_panes(:only => [:backlog, :selected, :active, :testing]).each do |pane_name| %>
+      <div id="user-kanban-show-<%= pane_name -%>-project-<%= project.id -%>" class="pane equal-column" style="width: <%= my_kanban_column_width(pane_name.to_sym)%>%">
+        <%= kanban_remote_data(kanban_user_kanban_path(:id => @user.id,
+                                                       :project => project.identifier,
+                                                       :column => pane_name.to_sym,
+                                                       :format => 'js'),
+                               "user-kanban-show-#{pane_name}-project-#{project.id}") %>
+      </div>
+    <% end %>
+
+    <div style="clear:left;"> </div>
+  </div>
+  <% end %>
+</div>
+
+<%= jquery_dialog_div %>
+
+<% if showing_current_user_kanban? %>
+  <% html_title l(:text_my_kanban_requests_title) %>
+<% else %>
+  <% html_title l(:text_user_kanban_requests_title, :user => @user ) %>
+<% end %>
+
+<% content_for :header_tags do %>
+  <%= include_calendar_headers_tags %>
+  <%= stylesheet_link_tag 'smoothness/jquery-ui-1.7.3.custom.css', :plugin => "redmine_kanban" %>
+  <%= stylesheet_link_tag 'redmine_kanban.css', :plugin => "redmine_kanban" %>
+  <%= javascript_include_tag 'jquery-1.3.2.min.js', :plugin => 'redmine_kanban' %>
+  <%= javascript_include_tag 'jquery-ui-1.7.3.custom.min.js', :plugin => 'redmine_kanban' %>
+  <%= javascript_include_tag 'jquery.json-1.3.min.js', :plugin => 'redmine_kanban' %>
+  <%= javascript_include_tag 'jquery.ajax_queue.js', :plugin => 'redmine_kanban' %>
+  <%= javascript_include_tag 'jquery.form.js', :plugin => 'redmine_kanban' %>
+  <%= javascript_include_tag 'kanban-common.js', :plugin => 'redmine_kanban' %>
+  <%= javascript_include_tag 'user_kanban.js', :plugin => 'redmine_kanban' %>
+<% end %>

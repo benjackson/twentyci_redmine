@@ -1,0 +1,47 @@
+<div id="new-issue-wrapper">
+
+<h2><%=l(:label_issue_new)%></h2>
+
+<div id="watch_and_cancel" class="flash notice" style="display:none;"></div>
+<% if @project %>
+<% labelled_tabular_form_for :issue, @issue, :url => {:controller => 'issues', :action => 'create', :project_id => @project, :format => 'xml'},
+                             :html => {:multipart => true, :id => 'issue-form'} do |f| %>
+    <div id="issue-form-errors" class="flash error" style="display:none;"></div>
+    <%= error_messages_for 'issue' %>
+    <% if @allowed_projects.length <= 1 %>
+      <%= f.hidden_field :project_id %>
+    <% else %>
+      <p><%= f.select :project_id, project_tree_options_for_select(@allowed_projects, :selected => @project) %></p>
+    <% end %>
+
+    <div class="box">
+      <%= render :partial => 'issues/form', :locals => {:f => f} %>
+    </div>
+    <%= submit_tag l(:button_create) %>
+<% end %>
+
+<% else %>
+
+<p class="nodata"><%= l(:kanban_text_no_project) %></p>
+
+<% end %>
+
+</div>
+
+<script type="text/javascript">
+Kanban.registerNewIssueCallbacks();
+Kanban.watched_issue = false;
+Kanban.takeOverWatchLinks('.recent-issues');
+</script>
+
+<style type="text/css">
+/* Remove some margin for recent issues in the popup only */
+.tabular .recent-issues h3 { margin-left: 10px; }
+.tabular .recent-issues div.recent-issue { margin-left: 10px; }
+<% if use_simple_issue_popup_form? %>
+#attributes {display: none;}
+#watchers_form {display: none;}
+<% end %>
+</style>
+
+<%= export_i18n_for_javascript %>

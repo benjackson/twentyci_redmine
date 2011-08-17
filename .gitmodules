@@ -1,3 +1,0 @@
-[submodule "vendor/plugins/redmine_kanban"]
-	path = vendor/plugins/redmine_kanban
-	url = https://github.com/edavis10/redmine_kanban.git
