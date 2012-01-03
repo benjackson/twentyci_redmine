@@ -2,6 +2,8 @@ GEM
   remote: http://rubygems.org/
   specs:
     Ascii85 (1.0.1)
+    aasm (3.0.1)
+      activerecord
     actionmailer (2.3.11)
       actionpack (= 2.3.11)
     actionpack (2.3.11)
@@ -13,6 +15,8 @@ GEM
       activesupport (= 2.3.11)
     activesupport (2.3.11)
     addressable (2.2.6)
+    block_helpers (0.3.3)
+      activesupport (>= 2.0)
     coderay (1.0.5)
     heroku (2.17.0)
       launchy (>= 0.3.2)
@@ -65,6 +69,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
+  block_helpers
   coderay
   heroku
   holidays

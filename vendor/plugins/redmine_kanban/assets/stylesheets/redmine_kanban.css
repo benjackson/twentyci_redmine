@@ -1,0 +1,304 @@
+/* Variables */
+/* My Kanban colors */
+/* Deadline colors */
+/* Equal height columns using margin-bottom: http://www.ejeliot.com/blog/61 */
+/* Uses the child element of '.equal-column' */
+.loading {
+  padding-left: 26px;
+  background-image: url(../../../images/loading.gif);
+  background-repeat: no-repeat;
+  font-weight: bold; }
+
+#kanban {
+  width: 100%; }
+
+.unstaffed-requests {
+  background-color: #F7F7FF; }
+
+#selected-requests {
+  background-color: #F7F7FF; }
+
+#incoming {
+  min-height: 200px; }
+
+#staffed-requests .user {
+  font-weight: bold; }
+
+.column {
+  min-height: 600px;
+  float: left;
+  margin-left: -2px;
+  border: 2px solid #333333;
+  padding: 5px; }
+
+.active-header {
+  width: 33%;
+  display: inline; }
+
+.active-header h3 {
+  display: inline; }
+
+#staffed-requests .column {
+  padding: 0; }
+
+#staffed-requests ol {
+  width: 96%; }
+
+.pane ol {
+  margin: 0 0 10px;
+  list-style: none;
+  padding-left: 0px;
+  min-height: 30px; }
+
+.pane ol li {
+  padding: 0; }
+
+#backlog-issues p, #quick-issues p {
+  margin: 0;
+  font-weight: bold; }
+
+ol#backlog-issues ol, ol#quick-issues ol {
+  padding-left: 15px;
+  margin-bottom: 15px; }
+
+/* Issue rows */
+li.issue {
+  cursor: move;
+  border: 1px dashed #ccc;
+  margin: 3px 3px 5px 3px;
+  background-color: #ffffdd; }
+
+li.issue .issue-details-body {
+  padding: 3px 3px;
+  font-size: smaller; }
+
+li.issue .issue-details-header {
+  padding: 1px 3px;
+  border-bottom: 1px solid #ccc; }
+
+/* Subtasks */
+li.issue.parent-issue .issue-details-header {
+  font-weight: bold; }
+
+/* over WIP limit */
+li.issue.over-limit {
+  background-color: #eeeeee; }
+
+li.issue.over-limit .issue-details-header {
+  background-color: #dcdcdc; }
+
+/* Assignments */
+li.issue.assigned-to-me .issue-details-header {
+  background-color: #dcf8df; }
+
+/* based on #a2eeac */
+/* behind schedule */
+li.issue.issue-behind-schedule .issue-details-header {
+  background-color: #f66914;
+  color: #FFFFFF; }
+
+li.issue.issue-behind-schedule .issue-details-header a {
+  color: #FFFFFF; }
+
+/* overdue issues */
+li.issue.issue-overdue .issue-details-header {
+  background-color: red; }
+
+/* END Issue rows */
+div.icons {
+  display: inline;
+  position: relative; }
+
+div.icons .updated-note {
+  cursor: pointer;
+  cursor: hand; }
+
+.drop-accepted {
+  background-color: #FFFFEE;
+  height: 32px;
+  margin-bottom: 5px;
+  border: 1px dashed #000000; }
+
+.general-help {
+  font-size: 90%;
+  font-style: italic; }
+
+#color-help .normal-color span {
+  background-color: #ffffdd; }
+#color-help .assigned-to-me-color span {
+  background-color: #dcf8df; }
+#color-help .behind-schedule-color span {
+  background-color: #f66914; }
+#color-help .overdue-color span {
+  background-color: red; }
+#color-help .over-wip-color span {
+  background-color: #eeeeee; }
+#color-help .parent-issue-color span {
+  font-weight: bold; }
+
+.icon-info {
+  background-image: url(../images/information.png); }
+
+#user_switch {
+  padding-left: 20px; }
+
+/* Popup dialog */
+.short-scroll {
+  max-height: 200px;
+  overflow-y: scroll; }
+
+/**** My Kanban requests ****/
+.horizontal-lane {
+  min-height: 100px;
+  clear: left; }
+
+.kanban-headers {
+  min-height: 36px; }
+  .kanban-headers div.pane {
+    min-height: 36px; }
+  .kanban-headers h3 {
+    float: left; }
+
+.horizontal-lane .pane, .project-lane div.project {
+  display: inline;
+  float: left;
+  min-height: 100px; }
+
+#new-requests {
+  float: right;
+  left: 0;
+  position: relative;
+  width: 19%; }
+
+.vertical-lane {
+  padding: 0; }
+
+.kanban-header h3, .inner-pane h3 {
+  border: none;
+  text-align: center;
+  width: 100%; }
+
+.vertical-lane .kanban-headers {
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  padding: 2px; }
+
+.project-lane div.project div.inner-pane {
+  padding: 10px 0; }
+.project-lane div.project div.inner-pane h3 {
+  text-align: center; }
+.project-lane .pane {
+  border-left: 1px solid #333333; }
+.project-lane .project-name {
+  padding: 0px 3px; }
+
+#new-requests {
+  border-width: 2px;
+  border-color: #333333;
+  border-style: solid; }
+  #new-requests .pane {
+    border: none; }
+
+#kanban {
+  overflow: hidden;
+  /* Equal height column hack */ }
+  #kanban .equal-column {
+    /* Used to hack the equal height columns*/
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+    /* end hack */
+    float: left; }
+  #kanban .pane {
+    border-width: 2px;
+    border-color: #333333;
+    border-style: solid; }
+  #kanban .pane.testing {
+    background-color: #eb613d; }
+  #kanban .pane.finished {
+    background-color: #94bd5e; }
+  #kanban .pane.canceled {
+    background-color: white; }
+  #kanban .pane.active {
+    background-color: #ffcc99; }
+  #kanban .pane.selected {
+    background-color: #ffff99; }
+  #kanban .pane.backlog {
+    background-color: #ccffff; }
+  #kanban .pane.incoming {
+    background-color: #99ccff; }
+  #kanban .inner-pane {
+    overflow: hidden;
+    /* Equal height column hack */ }
+    #kanban .inner-pane .equal-column {
+      /* Used to hack the equal height columns*/
+      margin-bottom: -99999px;
+      padding-bottom: 99999px;
+      /* end hack */
+      float: left; }
+    #kanban .inner-pane .pane {
+      border: none; }
+  #kanban li.issue {
+    cursor: auto; }
+
+#deadlines {
+  margin-bottom: 15px;
+  border-width: 2px;
+  border-color: #333333;
+  border-style: solid; }
+  #deadlines .horizontal-lane {
+    overflow: hidden;
+    /* Equal height column hack */ }
+    #deadlines .horizontal-lane .equal-column {
+      /* Used to hack the equal height columns*/
+      margin-bottom: -99999px;
+      padding-bottom: 99999px;
+      /* end hack */
+      float: left; }
+    #deadlines .horizontal-lane .equal-column {
+      margin-bottom: -120px;
+      padding-bottom: 120px; }
+    #deadlines .horizontal-lane .kanban-header {
+      width: 20%; }
+    #deadlines .horizontal-lane .deadline {
+      width: 20%; }
+      #deadlines .horizontal-lane .deadline ol {
+        overflow-y: scroll;
+        max-height: 120px; }
+    #deadlines .horizontal-lane .due-asap {
+      background-color: #f43232; }
+    #deadlines .horizontal-lane .due-in-3-days {
+      background-color: #ea6666; }
+    #deadlines .horizontal-lane .due-in-7-days {
+      background-color: #e09999; }
+    #deadlines .horizontal-lane .due-in-14-days {
+      background-color: #d6cccc; }
+    #deadlines .horizontal-lane .due-in-30-days {
+      background-color: #ccffff; }
+  #deadlines .issue {
+    cursor: auto; }
+
+div.calendar {
+  z-index: 9999; }
+
+#ajax-indicator {
+  z-index: 9999; }
+
+#kanban.kanban-overview h2.project-name {
+  border: none; }
+#kanban.kanban-overview h4.user-name {
+  border: none; }
+#kanban.kanban-overview .kanban-headers {
+  border-bottom: 4px solid #000000; }
+#kanban.kanban-overview .horizontal-lane, #kanban.kanban-overview .horizontal-lane .pane, #kanban.kanban-overview .project-lane div.project {
+  min-height: 60px; }
+#kanban.kanban-overview .project-lane div.project {
+  border-top-width: 0; }
+#kanban.kanban-overview .user-lane .pane {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-top-color: #666;
+  border-bottom-color: #666; }
+#kanban.kanban-overview div.clearing-row, #kanban.kanban-overview .clearing-row .pane {
+  min-height: 1px; }
+#kanban.kanban-overview div.clearing-row .pane {
+  border-width: 4px 0 0 0; }

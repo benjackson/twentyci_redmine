@@ -1,7 +1,9 @@
 source :rubygems
 
-gem "rails", "2.3.11"
+gem "aasm"
+gem "block_helpers"
 gem "i18n", "0.4.2"
+gem "rails", "2.3.11"
 
 # For redmine_backlogs plugin
 gem "icalendar"
@@ -16,3 +18,4 @@ group :development do
   gem "mysql"
   gem "taps"
 end
+
