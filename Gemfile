@@ -9,3 +9,10 @@ gem "prawn"
 gem "holidays"
 gem "open-uri-cached"
 gem "nokogiri"
+
+group :development do
+  gem "coderay"
+  gem "heroku"
+  gem "mysql"
+  gem "taps"
+end
