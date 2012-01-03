@@ -25,3 +25,6 @@
 .rvmrc
 /bin
 *~
+/.bundle
+/nbproject
+/pg
