@@ -1,0 +1,18 @@
+// Initialize the backlogs after DOM is loaded
+RB.$(function() {
+  // Initialize each backlog
+  RB.$('.backlog').each(function(index){
+    RB.Factory.initialize(RB.Backlog, this);
+  });
+  // RB.$("#project_info").bind('click', function(){ RB.$("#velocity").dialog({ modal: true, title: "Project Info"}); });
+  RB.BacklogsUpdater.start();
+
+  // Workaround for IE7
+  if(RB.$.browser.msie && RB.$.browser.version <= 7){
+    var z = 2000;
+    RB.$('.backlog, .header').each(function(){
+      RB.$(this).css('z-index', z);
+      z--;
+    });
+  }
+});
